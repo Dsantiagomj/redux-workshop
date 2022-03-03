@@ -32,9 +32,29 @@ const taskSlice = createSlice({
         },
       ];
     },
-    toggleTodo(state, action) {},
-    editTodo(state, action) {},
-    deleteTodo(state, action) {},
+    toggleTodo(state, action) {
+      return state.map((tarea) =>
+        tarea.id === action.payload
+          ? { ...tarea, completado: !tarea.completado }
+          : tarea
+      );
+    },
+    editTodo(state, action) {
+      return state.map((tarea) =>
+        tarea.id === action.payload.id
+          ? {
+              id: action.payload.id,
+              titulo: action.payload.titulo,
+              completado: action.payload.completado,
+            }
+          : tarea
+      );
+    },
+    deleteTodo(state, action) {
+      return state
+        .map((tarea) => (tarea.id === action.payload ? null : tarea))
+        .filter((tarea) => tarea != null);
+    },
   },
 });
 
