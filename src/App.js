@@ -1,4 +1,7 @@
 import { useState, useEffect, useReducer } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { taskActions } from './redux/taskSlice';
+
 import Formulario from './formulario';
 import ListaTareas from './listaTareas';
 
@@ -81,6 +84,9 @@ function App() {
   const [state, dispatch] = useReducer(reducer, []);
   const [editable, setEditable] = useState(null);
 
+  const tasks = useSelector((state) => state.tasks);
+  const dispatcher = useDispatch();
+
   // Ciclo de vida con hook useEffect
   useEffect(() => {
     dispatch({ type: ACTIONS.CARGAR_TAREAS });
@@ -88,7 +94,8 @@ function App() {
 
   // función para agregar una nueva tarea
   const handleRegistrar = (tarea) => {
-    dispatch({ type: ACTIONS.CREAR_TAREA, payload: { tarea } });
+    // dispatch({ type: ACTIONS.CREAR_TAREA, payload: { tarea } });
+    dispatcher(taskActions.createTodo(tarea));
   };
 
   // función para cambiar el estado de una tarea
@@ -123,7 +130,7 @@ function App() {
           editable={editable}
         />
         <ListaTareas
-          listaTareas={state}
+          listaTareas={tasks}
           handleToggle={handleToggle}
           handleEliminar={handleEliminar}
           recibirEditable={recibirEditable}

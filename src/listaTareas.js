@@ -7,12 +7,12 @@ export default function ListaTareas({
   recibirEditable,
 }) {
   const botonIncompleta = (id) => (
-    <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
+    <button className="btn btn-primary mx-2" onClick={() => handleToggle(id)}>
       Marcar incompleta
     </button>
   );
   const botonCompleta = (id) => (
-    <button className="btn btn-primary mr-2" onClick={() => handleToggle(id)}>
+    <button className="btn btn-primary mx-2" onClick={() => handleToggle(id)}>
       Marcar completada
     </button>
   );
