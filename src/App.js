@@ -8,7 +8,7 @@ import ListaTareas from './listaTareas';
 function App() {
   const [editable, setEditable] = useState(null);
 
-  const tasks = useSelector((state) => state.tasks);
+  const tasks = useSelector((state) => state.tasks.taskList);
   const dispatcher = useDispatch();
 
   // función para agregar una nueva tarea

@@ -1,30 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [
-  {
-    id: 1,
-    titulo: 'Comprar leche',
-    completado: false,
-  },
-  {
-    id: 2,
-    titulo: 'Hacer presentación de React',
-    completado: true,
-  },
-  {
-    id: 3,
-    titulo: 'Sacar la basura',
-    completado: false,
-  },
-];
+const initialState = {
+  taskList: [
+    {
+      id: 1,
+      titulo: 'Comprar leche',
+      completado: false,
+    },
+    {
+      id: 2,
+      titulo: 'Hacer presentación de React',
+      completado: true,
+    },
+    {
+      id: 3,
+      titulo: 'Sacar la basura',
+      completado: false,
+    },
+  ],
+};
 
 const taskSlice = createSlice({
   name: 'tasks',
   initialState: initialState,
   reducers: {
     createTodo(state, action) {
-      return [
-        ...state,
+      state.taskList = [
+        ...state.taskList,
         {
           id: Math.floor(Math.random * 100),
           titulo: action.payload,
@@ -33,14 +35,14 @@ const taskSlice = createSlice({
       ];
     },
     toggleTodo(state, action) {
-      return state.map((tarea) =>
+      state.taskList = state.taskList.map((tarea) =>
         tarea.id === action.payload
           ? { ...tarea, completado: !tarea.completado }
           : tarea
       );
     },
     editTodo(state, action) {
-      return state.map((tarea) =>
+      state.taskList = state.taskList.map((tarea) =>
         tarea.id === action.payload.id
           ? {
               id: action.payload.id,
@@ -51,7 +53,7 @@ const taskSlice = createSlice({
       );
     },
     deleteTodo(state, action) {
-      return state
+      state.taskList = state.taskList
         .map((tarea) => (tarea.id === action.payload ? null : tarea))
         .filter((tarea) => tarea != null);
     },
