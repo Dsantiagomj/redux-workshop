@@ -22,7 +22,7 @@ const initialState = {
 
 const taskSlice = createSlice({
   name: 'tasks',
-  initialState: initialState,
+  initialState,
   reducers: {
     createTodo(state, action) {
       state.taskList = [
